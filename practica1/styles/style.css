@@ -1,78 +1,189 @@
-body{
+h2{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+}
+h4{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 1.5rem !important;
+    font-weight: 500 !important;
+}
+p{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px !important;
+}
+body {
     background-image: url("../img/cerro.jpg") !important;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.logoRuta{
+
+.logoRuta {
     width: 60px;
     height: 60px;
     margin-right: 15px;
     margin-left: 15px;
     cursor: pointer;
 }
-.logoRuta:hover{
+
+.logoRuta:hover {
     -webkit-transform: scale(1.08);
     transform: scale(1.08);
 }
 
 /*QUIENES SOMOS*/
-.container-who{
+.container-who {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.who{
+
+.who {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 20px;
+    text-align: justify;
 }
-.div-who{
+
+.div-who {
     margin-top: 15px;
     margin-bottom: 5px;
     background-color: #fff;
     border-radius: 5px;
-    padding: 20px 20px 20px 0px ;
+    padding: 20px 20px 20px 0px;
+    align-items: center;
+    justify-content: center;
 }
-.img-who-flc{
+
+.img-who-flc {
     padding-right: 0;
     padding-left: 20px;
+    height: 300px;
+    width: 300px;
 }
-.img-who-ruta{
+
+.img-who-ruta {
     padding-right: 0;
     padding-left: 20px;
 }
 
 /*EDICIONES*/
-.container-ediciones{
+.container-ediciones {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-left: 0;
+    padding-right: 0;
 }
-.container-ediciones-18-19{
+
+.container-ediciones-18-19 {
     text-align: center;
     background-color: #fff;
     padding: 15px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
-    border-radius: 5px;
 }
-.img-edi-ruta{
-    width: 35%;
+
+.img-edi-ruta {
+    width: 350px;
     align-self: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
-.div-ruta-2022 img{
+.img-edi-ruta:hover {
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+}
+
+.div-ruta-2022 {
+    margin: 0;
+}
+
+.div-ruta-2022 img {
     width: 100%;
 }
-.div-info-text-ruta{
+
+.div-info-text-ruta {
     display: flex;
     flex-direction: column;
     text-align: justify;
     margin-top: 5px;
+}
+
+/*FOOTER*/
+.div-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 15px;
+    background-image: url("../img/Logo\ simple.png");
+}
+
+.nav-footer {
+    margin-bottom: 15px;
+    list-style: none;
+    text-align: left;
+    padding: 0;
+}
+
+.nav-footer a {
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+
+    text-decoration: none;
+    color: #333333;
+}
+
+.nav-footer a:hover {
+    color: whitesmoke;
+}
+
+.div-foot-nav-info {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.img-ruta-foot {
+    width: 150px;
+    transition: all 0.3s ease-in-out;
+}
+
+.img-ruta-foot:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.img-red {
+    margin-right: 15px;
+    width: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.img-red:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.copy-foot {
+    text-align: center;
+    margin: 0;
+}
+
+.div-foot-red {
+    justify-content: center;
+    align-items: center;
+    display: contents;
 }
 
 /*UBICACION*/
