@@ -116,6 +116,78 @@ body {
     flex-direction: column;
     text-align: justify;
     margin-top: 5px;
+}/*EDICIONES*/
+.container-ediciones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.container-ediciones-18-19 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.div-card{
+    display: flex;
+    justify-content: center;
+}
+
+.img-edi-ruta {
+    width: 400px;
+    align-self: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.img-edi-ruta:hover {
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+}
+
+.div-ruta-2022 {
+    margin: 0;
+}
+
+.div-ruta-2022 img {
+    width: 100%;
+}
+
+/*CARTA*/
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+}
+.front {
+    z-index: 2;
+    transition: all 0.5s linear;
+}
+.back {
+    transition: all 0.5s linear;
+    transform: rotateY(180deg);
+}
+.containers {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    justify-items: center;
+    display: flex;
+    width: 400px;
+    height: 400px;
+}
+.containers:hover .front {
+    transform: rotateY(180deg);
+}
+.containers:hover .back {
+    transform: rotateY(360deg);
 }
 
 /*FOOTER*/
