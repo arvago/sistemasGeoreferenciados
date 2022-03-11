@@ -22,7 +22,7 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(muestraPosicion);
             }else{
-                var alerta =  document.getElementById("alerta");
+                var alerta = document.getElementById("alerta");
                 alerta.innerHTML = "El navegador no dispone de GeoLocalización"
             }
         }
