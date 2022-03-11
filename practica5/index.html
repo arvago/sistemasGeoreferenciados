@@ -52,7 +52,7 @@
             }
 
             const mapa = document.getElementById('map')
-            const map = new google.maps.Map()
+            const map = new google.maps.Map(mapa, propiedades)
             if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(
                     position => {
