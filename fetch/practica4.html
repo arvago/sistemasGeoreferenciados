@@ -40,21 +40,23 @@
             const map = new google.maps.Map(document.getElementById('map'), propiedades)
             fetch("paises.json")
             .then( (response) => {
-                response.json().then((datos) => {                        
-                    let marker = new google.maps.Marker({
-                    map: map,
-                    position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
-                    title: marcador.name
-                })
-                })
-            })
-        }
-
-        function obtieneMarcadores(){
-            fetch("paises.json")
-            .then( (response) => {
-                response.json().then((datos) => {                        
-                    console.log(datos, "DATOS")
+                response.json().then((datos) => {      
+                    datos.forEach(marcador => {
+                        var info = `<strong>País: </strong> ${marcador.CountryName}`
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: info
+                        })
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
+                            title: marcador.CountryName
+                        })
+                        marker.addListener('click', () => {
+                            infoWindow.open(map, marker)
+                        })
+                    });                         
+                }).catch((err) => {
+                    console.log(err)
                 })
             })
         }
