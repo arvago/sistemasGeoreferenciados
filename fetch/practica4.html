@@ -40,24 +40,22 @@
             const map = new google.maps.Map(document.getElementById('map'), propiedades)
             const marcadores = obtieneMarcadores();
             console.log(marcadores)
-            for(marcador of marcadores){
+            /*for(marcador of marcadores){
                 let marker = new google.maps.Marker({
                     map: map,
                     position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
                     title: marcador.name
                 })
-            }
+            }*/
         }
 
         function obtieneMarcadores(){
-            let marcadores
             fetch("paises.json")
             .then( (response) => {
                 response.json().then((datos) => {                        
-                    marcadores = datos
+                    return datos
                 })
-            })                
-            return marcadores
+            })
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
