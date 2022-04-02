@@ -48,9 +48,6 @@
 
     
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&callback=iniciaMapa"
-        async defer>
-    </script>
     <script>
         var coordenadas = {
             lat: -31.563910, lng: 147.154312
@@ -72,6 +69,10 @@
             .then( (response) => {
                 response.json().then((datos) => {      
                     datos.forEach(marcador => {
+                        var info = `<strong>País: </strong> ${marcador.CountryName}`
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: info
+                        })
                         var icono = {
                             url: "https://media.giphy.com/media/yDg044XWdVqK5q8nZL/giphy.gif",
                             scaledSize: new google.maps.Size(50, 50),
@@ -84,11 +85,16 @@
                             position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
                             label: labels[cuenta % labels.length]
                         })
+                        marker.addListener('click', () => {
+                            infoWindow.open(map, marker)
+                        })
                         marks.push(marker)
                         cuenta ++;
                     });     
                     var markerCluster = new MarkerCluster(map, marks, {
-                        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+                        imagePath: 'https://camo.githubusercontent.com/c1d0f94b63321e032916e45fc5d0826e417a675f800d36b9b636cd032a1d43db/68747470733a2f2f6d61726b65722e6e616e6f6b612e66722f6d61705f636c75737465722d4646303030302d3132302e737667',
+                        gridSize: 60,
+                        zoomOnClick: true,
                         maxZoom: 10
                     })         
                     
@@ -120,5 +126,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&callback=iniciaMapa" async defer></script>
 </body>
 </html>
