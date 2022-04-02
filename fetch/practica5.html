@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Práctica 4 - Fetch</title>
+
+    <style>
+       #map{
+            width: 100%;
+            height: 100%;
+        }
+        html, body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Google Maps Clustering</h1>
+                    <div id="mapa"></div>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-3 text-center">
+                    <button class="btn btn-primary" id="btnroadmap">roadmap</button>
+                </div>
+                <div class="col-3 text-center">
+                    <button class="btn btn-warning" id="btnsatellite">satellite</button>
+                </div>
+                <div class="col-3 text-center">
+                    <button class="btn btn-danger" id="btnhybrid">hybrid</button>
+                </div>
+                <div class="col-3 text-center">
+                    <button class="btn btn-success" id="btnterrain">terrain</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&callback=iniciaMapa"
+        async defer>
+    </script>
+    <script>
+        var coordenadas = {
+            lat: 0,
+            lng: 0
+        }
+
+        var propiedades = {
+            center: coordenadas,
+            zoom: 3
+        }
+
+
+
+        function iniciaMapa() {
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            var cuenta = 1
+            var marks = []
+            const map = new google.maps.Map(document.getElementById('map'), propiedades)
+            fetch("paises.json")
+            .then( (response) => {
+                response.json().then((datos) => {      
+                    datos.forEach(marcador => {
+                        var icono = {
+                            url: "https://media.giphy.com/media/yDg044XWdVqK5q8nZL/giphy.gif",
+                            scaledSize: new google.maps.Size(50, 50),
+                            origin: new google.maps.Point(0,0),
+                            anchor: new google.maps.Point(0,0)
+                        }
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            icon: icono,
+                            position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
+                            label: labels[cuenta % labels.length]
+                        })
+                        marks.push(marker)
+                        cuenta ++;
+                    });     
+                    var makerCluster = new MarkerCluster(map, marks, {
+                        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+                        maxZoom: 10
+                    })         
+                    
+                    document.getElementById('btnroadmap').addEventListener('click', function(){
+                        map.setMapTypeId('roadmap');
+                    });
+
+                    document.getElementById('btnsatellite').addEventListener('click', function(){
+                        map.setMapTypeId('satellite');
+                    });
+
+                    document.getElementById('btnhybrid').addEventListener('click', function(){
+                        map.setMapTypeId('hybrid');
+                    });
+
+                    document.getElementById('btnterrain').addEventListener('click', function(){
+                        map.setMapTypeId('terrain');
+                    });
+                }).catch((err) => {
+                    console.log(err)
+                })
+            })
+        }
+
+        
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&callback=iniciaMapa" async defer></script>
+</body>
+</html>
