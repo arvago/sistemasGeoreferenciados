@@ -10,6 +10,7 @@
 
     <style>
        html, body {
+            height: 100%;
             margin: 0px;
             padding: 0px;
         }
@@ -29,18 +30,14 @@
                     <div id="map"></div>
                 </div>
             </div>
-            <div class="row p-2">
-                <div class="col-3 text-center">
-                    <button class="btn btn-primary" id="btnroadmap">Roadmap</button>
-                </div>
-                <div class="col-3 text-center">
-                    <button class="btn btn-warning" id="btnsatellite">Satellite</button>
-                </div>
-                <div class="col-3 text-center">
-                    <button class="btn btn-danger" id="btnhybrid">Hybrid</button>
-                </div>
-                <div class="col-3 text-center">
-                    <button class="btn btn-success" id="btnterrain">Terrain</button>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-3"><button class="btn btn-primary" id="roadMap">
+                            Roadmap
+                        </button></div>
+                    <div class="col-3"><button id="satelite" class="btn btn-warning">Satelite</button></div>
+                    <div class="col-3"><button id="hybrid" class="btn btn-success">Hybrid</button></div>
+                    <div class="col-3"><button id="terrain" class="btn btn-danger">Terrain</button></div>
                 </div>
             </div>
         </div>
@@ -50,7 +47,8 @@
 
     <script>
         var coordenadas = {
-            lat: -31.563910, lng: 147.154312
+            lat: 0,
+            lng: 0
         }
 
         var propiedades = {
@@ -83,7 +81,8 @@
                             map: map,
                             icon: icono,
                             position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
-                            label: labels[cuenta % labels.length]
+                            title: marcador.CountryName,
+                            label: marcador.CountryCode
                         })
                         marker.addListener('click', () => {
                             infoWindow.open(map, marker)
@@ -98,21 +97,19 @@
                         maxZoom: 10
                     })         
                     
-                    document.getElementById('btnroadmap').addEventListener('click', function(){
-                        map.setMapTypeId('roadmap');
-                    });
+                    document.getElementById("roadMap").addEventListener('click', () => {
+                        map.setMapTypeId("roadmap")
+                    })
 
-                    document.getElementById('btnsatellite').addEventListener('click', function(){
-                        map.setMapTypeId('satellite');
-                    });
-
-                    document.getElementById('btnhybrid').addEventListener('click', function(){
-                        map.setMapTypeId('hybrid');
-                    });
-
-                    document.getElementById('btnterrain').addEventListener('click', function(){
-                        map.setMapTypeId('terrain');
-                    });
+                    document.getElementById("satelite").addEventListener('click', () => {
+                        map.setMapTypeId("satelite")
+                    })
+                    document.getElementById("hybrid").addEventListener("click", () => {
+                        map.setMapTypeId("hybrid")
+                    })
+                    document.getElementById("terrain").addEventListener("click", () => {
+                        map.setMapTypeId("terrain")
+                    })
                 }).catch((err) => {
                     console.log(err)
                 })
