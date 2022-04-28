@@ -137,10 +137,19 @@
         }
         var mapa5 = new google.maps.Map(document.getElementById("map5"), propiedades5)
 
+        var limites = {
+            north: 21.390039,
+            south: 20.858414,
+            west: -102.149631,
+            east: -101.092990
+        }
         var propiedades6 = {
             center: coordenadas,
             zoom: 12,
-            disableDefaultUI: true
+            restriction: {
+                latLngBounds: limites,
+                strictBounds: false
+            }
         }
         var mapa6 = new google.maps.Map(document.getElementById("map6"), propiedades6)
 
