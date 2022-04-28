@@ -110,7 +110,7 @@
             zoom: 12,
             mapTypeControl: true,
             mapTypeControlOptions: {
-                style: google.maps.Map.MapTypeControlStyle.DROPDOWN_MENU,
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
                 mapTypeIds: ['roadmap', 'satellite', 'terrain']
             }
         }
@@ -119,7 +119,21 @@
         var propiedades5 = {
             center: coordenadas,
             zoom: 12,
-            disableDefaultUI: true
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.TOP_CENTER
+            },
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
+            },
+            scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+                position: google.maps.ControlPosition.LEFT_TOP
+            },
+            fullscreenControl: true
         }
         var mapa5 = new google.maps.Map(document.getElementById("map5"), propiedades5)
 
