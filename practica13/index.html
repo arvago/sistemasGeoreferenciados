@@ -51,7 +51,6 @@
 <script>
     var map;
     var markers = [];
-    var valor;
 
     function iniciaMapa() {
         var coordenadas = {
@@ -68,7 +67,9 @@
     }
 
     var tipo = document.getElementById('tipo');
-    tipo.addEventListener('change', () => {
+    var valor;
+
+    tipo.addEventListener('change', function () {
         valor = this.options[tipo.selectedIndex].value;
         muestraLugares();
     });
@@ -86,7 +87,7 @@
                     location: coordenadas,
                     radius: 1000,
                     type: [valor]
-                }, (results, status, pagination) => {
+                }, function (results, status, pagination) {
                     if (status !== 'OK') return;
                     crearMarcadores(results);
                 });
@@ -94,11 +95,11 @@
         }
     }
 
-
     function crearMarcadores(places) {
         var bounds = new google.maps.LatLngBounds();
         console.log(places);
         borraMarcadores();
+
         for (var i = 0, place; place = places[i]; i++) {
             var marker = new google.maps.Marker({
                 map: map,
@@ -107,16 +108,15 @@
             });
             markers.push(marker);
 
-            google.maps.event.addListener(marker, 'mouseover', () => {
+            google.maps.event.addListener(marker, 'mouseover', function () {
                 var infowindow = new google.maps.InfoWindow({
                     content: this.title,
                     position: this.position
                 });
                 infowindow.open(map);
-                setTimeout(() => {
+                setTimeout(function () {
                     infowindow.close();
                 }, 3000);
-
             });
 
             var li = document.createElement('li');
@@ -131,16 +131,23 @@
         for (var i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         };
-
         while (placesList.hasChildNodes()) {
             placesList.removeChild(placesList.firstChild);
         }
     }
 </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&libraries=places&callback=iniciaMapa" async defer></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&libraries=places&callback=iniciaMapa"
+    async defer></script>
 
 </html>
