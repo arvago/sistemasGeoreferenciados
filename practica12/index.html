@@ -87,7 +87,7 @@
             position: coordenadas,
             map: mapa1
         });
-        marker.addListener('click', function () {
+        marker.addListener('click', () => {
             mapa1.setZoom(8);
             mapa1.setCenter(marker.getPosition());
         });
@@ -97,14 +97,14 @@
             position: coordenadas,
             map: mapa2
         });
-        mapa2.addListener('center_changed', function () {
-            window.setTimeout(function () {
+        mapa2.addListener('center_changed', () => {
+            window.setTimeout(() => {
                 mapa2.panTo(marker2.getPosition());
             }, 3000);
         });
 
         var mapa3 = new google.maps.Map(document.getElementById('mapa3'), propiedades);
-        mapa3.addListener('zoom_changed', function () {
+        mapa3.addListener('zoom_changed', () => {
             var infowindow = new google.maps.InfoWindow({
                 content: 'Cambia el zoom',
                 position: coordenadas
@@ -115,7 +115,7 @@
         });
 
         var mapa4 = new google.maps.Map(document.getElementById('mapa4'), propiedades);
-        mapa4.addListener('click', function (e) {
+        mapa4.addListener('click',  (e) => {
             console.log(e.latLng);
             estableceMarcador(e.latLng);
         });
@@ -134,7 +134,7 @@
             position: coordenadas
         });
         infowindow.open(mapa5);
-        mapa5.addListener('click', function (evento) {
+        mapa5.addListener('click', (evento) => {
             infowindow.close();
             infowindow = new google.maps.InfoWindow({
                 position: evento.latLng
@@ -144,11 +144,11 @@
         });
 
         var mapa6 = new google.maps.Map(document.getElementById('mapa6'), propiedades);
-        google.maps.event.addDomListener(mapa6, 'click', function () {
+        google.maps.event.addDomListener(mapa6, 'click', () =>{
             window.alert(' Se hizo click en el mapa');
         });
         var boton = document.getElementById('btnCentrar');
-        google.maps.event.addDomListener(boton, 'click', function () {
+        google.maps.event.addDomListener(boton, 'click', () => {
             mapa6.panTo(coordenadas);
         });
     }
