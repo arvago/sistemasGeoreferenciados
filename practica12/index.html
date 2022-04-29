@@ -109,6 +109,7 @@
                 content: 'Cambia el zoom',
                 position: coordenadas
             });
+            infowindow.close()
             infowindow.open(mapa3);
             nivelZoom = mapa3.getZoom();
             infowindow.setContent('Zoom:' + nivelZoom);
