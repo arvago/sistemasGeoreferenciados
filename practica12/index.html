@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h1>Controles de mapaa</h1>
+                    <h1>Eventos</h1>
                 </div>
             </div>
         </div>
@@ -60,11 +60,11 @@
                 </div>
                 <div class="col-6">
                     <div id="map5" class="shadow bg-light"></div>
-                    <p class="text-center"></p>
+                    <p class="text-center">Obtiene coordenadas con mapsMouseEvent</p>
                 </div>
                 <div class="col-6">
                     <div id="map6" class="shadow bg-light"></div>
-                    <p class="text-center"></p>
+                    <p class="text-center">addDOMListener</p>
                 </div>
             </div>
         </div>
@@ -98,45 +98,36 @@
             position: coordenadas,
             map: mapa2
         })
+        marker2.addListener('center_changed', () => {
+            window.setTimeout(() => {
+                mapa2.panTo(marker2.getPosition());
+            }, 3000)
+        })
 
-        var propiedades3 = {
-            center: coordenadas,
-            zoom: 12,
-            zoomControl: false,
-            scaleControl: false
-        }
-        var mapa3 = new google.maps.Map(document.getElementById("map3"), propiedades3)
+        var mapa3 = new google.maps.Map(document.getElementById("map3"), propiedades)
+        mapa3.addListener('zoom_changed', () => {
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Cambia el zoom',
+                position: coordenadas
+            })
+            infowindow.open(mapa3);
+            nivelZoom = mapa3.getZoom()
+            infowindow.setContent(`Zoom: ${nivelZoom}`)
+        })
 
-        var propiedades4 = {
-            center: coordenadas,
-            zoom: 12,
-            mapTypeControl: true,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                mapTypeIds: ['roadmap', 'satellite', 'terrain']
-            }
+        var mapa4 = new google.maps.Map(document.getElementById("map4"), propiedades)
+        mapa4.addListener('ciclk', (e) => {
+            console.log(e.latLng)
+            estableceMarcador(e.latLng)
+        });
+        function estableceMarcador(latLng){
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: mapa4
+            })
+            mapa4.panTo(latLng);
         }
-        var mapa4 = new google.maps.Map(document.getElementById("map4"), propiedades4)
 
-        var propiedades5 = {
-            center: coordenadas,
-            zoom: 12,
-            mapTypeControl: true,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                position: google.maps.ControlPosition.TOP_CENTER
-            },
-            zoomControl: true,
-            zoomControlOptions: {
-                position: google.maps.ControlPosition.LEFT_CENTER
-            },
-            scaleControl: true,
-            streetViewControl: true,
-            streetViewControlOptions: {
-                position: google.maps.ControlPosition.LEFT_TOP
-            },
-            fullscreenControl: true
-        }
         var mapa5 = new google.maps.Map(document.getElementById("map5"), propiedades5)
 
         var limites = {
