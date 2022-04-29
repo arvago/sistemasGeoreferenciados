@@ -82,7 +82,7 @@
             center: coordenadas,
             zoom: 12
         };
-        var mapa1 = new google.maps.Map(document.getElementById('mapa1'), propiedades);
+        var mapa1 = new google.maps.Map(document.getElementById('map1'), propiedades);
         var marker = new google.maps.Marker({
             position: coordenadas,
             map: mapa1
@@ -92,7 +92,7 @@
             mapa1.setCenter(marker.getPosition());
         });
 
-        var mapa2 = new google.maps.Map(document.getElementById('mapa2'), propiedades);
+        var mapa2 = new google.maps.Map(document.getElementById('map2'), propiedades);
         var marker2 = new google.maps.Marker({
             position: coordenadas,
             map: mapa2
@@ -103,7 +103,7 @@
             }, 3000);
         });
 
-        var mapa3 = new google.maps.Map(document.getElementById('mapa3'), propiedades);
+        var mapa3 = new google.maps.Map(document.getElementById('map3'), propiedades);
         mapa3.addListener('zoom_changed', () => {
             var infowindow = new google.maps.InfoWindow({
                 content: 'Cambia el zoom',
@@ -114,7 +114,7 @@
             infowindow.setContent('Zoom:' + nivelZoom);
         });
 
-        var mapa4 = new google.maps.Map(document.getElementById('mapa4'), propiedades);
+        var mapa4 = new google.maps.Map(document.getElementById('map4'), propiedades);
         mapa4.addListener('click',  (e) => {
             console.log(e.latLng);
             estableceMarcador(e.latLng);
@@ -128,7 +128,7 @@
             mapa4.panTo(latLng);
         }
 
-        var mapa5 = new google.maps.Map(document.getElementById('mapa5'), propiedades);
+        var mapa5 = new google.maps.Map(document.getElementById('map5'), propiedades);
         var infowindow = new google.maps.InfoWindow({
             content: 'Haz click para obtener las coordenadas',
             position: coordenadas
@@ -143,7 +143,7 @@
             infowindow.open(mapa5);
         });
 
-        var mapa6 = new google.maps.Map(document.getElementById('mapa6'), propiedades);
+        var mapa6 = new google.maps.Map(document.getElementById('map6'), propiedades);
         google.maps.event.addDomListener(mapa6, 'click', () =>{
             window.alert(' Se hizo click en el mapa');
         });
